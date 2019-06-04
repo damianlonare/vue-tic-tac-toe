@@ -26,7 +26,7 @@ describe('App.vue', () => {
 		expect(validSquares.length).to.equal(9)
 	})
 
-	it('when click a square, shows an "X" letter if is the first move', () => {
+	it('when click a square, shows an "X" mark if is the first move', () => {
 		const square = boardChilds.at(0)
 		let valueBeforeClick = null
 		let valueAfterClick = null
@@ -37,5 +37,21 @@ describe('App.vue', () => {
 
 		expect(valueBeforeClick).to.equal(null)
 		expect(valueAfterClick).to.equal('X')
+	})
+
+	it('when the last click shows an "X" mark, a new click should shows a "O" mark', () => {
+		const xSquare = boardChilds.at(0)
+		let xSquareValue = null
+		const oSquare = boardChilds.at(1)
+		let oSquareValue = null
+		
+		xSquare.find('button').trigger('click')
+		xSquareValue = xSquare.find('button').text()
+
+		oSquare.find('button').trigger('click')
+		oSquareValue = oSquare.find('button').text()
+
+		expect(xSquareValue).to.equal('X')
+		expect(oSquareValue).to.equal('O')
 	})
 })
